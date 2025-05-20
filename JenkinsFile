@@ -6,12 +6,6 @@ steps {
 git branch: 'main', url: ' https://github.com/AishuN1107/8.2CDevSecOps.git'
 }
 }
-stage('Check NPM') {
-  steps {
-    sh 'which npm && npm -v'
-  }
-}
-
 stage('Install Dependencies') {
 steps {
 sh 'npm install'
