@@ -44,7 +44,7 @@ pipeline {
         }
         emailext subject: "Security Scan Status: ${currentBuild.currentResult}",
                  body: "Security scan result: ${currentBuild.currentResult}",
-                 to: 'your_email@gmail.com',
+                 to: 'saiaishunaidu2003@gmail.com',
                  attachLog: true
       }
     }
