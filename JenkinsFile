@@ -21,7 +21,13 @@ pipeline {
 
     stage('Run Tests') {
       steps {
-        sh 'npm test || true'
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'npm test'
+        }
+        emailext subject: "Test Stage Status: ${currentBuild.currentResult}",
+                 body: "Test stage result: ${currentBuild.currentResult}",
+                 to: 'your_email@gmail.com',
+                 attachLog: true
       }
     }
 
@@ -33,7 +39,13 @@ pipeline {
 
     stage('NPM Audit (Security Scan)') {
       steps {
-        sh 'npm audit || true'
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'npm audit'
+        }
+        emailext subject: "Security Scan Status: ${currentBuild.currentResult}",
+                 body: "Security scan result: ${currentBuild.currentResult}",
+                 to: 'your_email@gmail.com',
+                 attachLog: true
       }
     }
   }
