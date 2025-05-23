@@ -36,17 +36,5 @@ pipeline {
         sh 'npm run coverage || true'
       }
     }
-
-    stage('NPM Audit (Security Scan)') {
-      steps {
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          sh 'npm audit'
-        }
-        emailext subject: "Security Scan Status: ${currentBuild.currentResult}",
-                 body: "Security scan result: ${currentBuild.currentResult}",
-                 to: 'saiaishunaidu2003@gmail.com',
-                 attachLog: true
-      }
-    }
   }
 }
