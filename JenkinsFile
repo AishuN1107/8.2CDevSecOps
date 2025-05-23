@@ -1,32 +1,34 @@
 pipeline {
     agent any
-    options {
-        shell '/bin/sh'
-    }
+
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/AishuN1107/8.2CDevSecOps.git'
             }
         }
+
         stage('Install Dependencies') {
             steps {
-                sh '/bin/bash -c "npm install"'
+                sh 'npm install'
             }
         }
+
         stage('Run Tests') {
             steps {
-                sh '/bin/bash -c "npm test || true"'
+                sh 'npm test || true' 
             }
         }
+
         stage('Generate Coverage Report') {
             steps {
-                sh '/bin/bash -c "npm run coverage || true"'
+                sh 'npm run coverage || true'
             }
         }
+
         stage('NPM Audit (Security Scan)') {
             steps {
-                sh '/bin/bash -c "npm audit || true"'
+                sh 'npm audit || true'
             }
         }
     }
