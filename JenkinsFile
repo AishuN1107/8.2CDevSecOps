@@ -9,13 +9,15 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
+        git branch: 'main', url: 'https://github.com/AishuN1107/8.2CDevSecOps.git'
+      }
+    }
 
     stage('Install Dependencies') {
       steps {
         sh 'npm install'
       }
     }
-      }
 
     stage('Run Tests') {
       steps {
@@ -34,6 +36,5 @@ pipeline {
         sh 'npm audit || true'
       }
     }
-  }
   }
 }
